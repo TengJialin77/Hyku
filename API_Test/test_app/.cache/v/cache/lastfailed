@@ -1,0 +1,11 @@
+{
+  "test_ugc.py::test_create[-ugc_1M.gif-content\\uff1a\\u56fe\\u7247\\u4e3agif-tag-200.0]": true, 
+  "test_ugc.py::test_create[-ugc_normal.jpg--tag:\\u6b63\\u6587\\u4f20\\u7a7a-200.0]": true, 
+  "test_ugc.py::test_create[-ugc_normal.jpg-content\\uff1a\\u8fd9\\u91cc\\u662fugc\\u6b63\\u6587\\uff0c\\u6709\\u5404\\u79cd\\u5b57\\u7b26\\uff0c\\u5305\\u62ec\\uff08\\u6570\\u5b57123\\uff0c\\u7b26\\u53f7\\uff01@#\\uffe5%/*\\uff0c\\u5b57\\u6bcdabc\\uff09\\uff0c\\u800c\\u4e14\\u5b57\\u6570\\u8fd8\\u633a\\u591a\\uff0c\\u770b\\u770b\\u663e\\u793a\\u5982\\u4f55\\uff0c\\u597d\\u4e48\\uff0c\\u8c22\\u8c22\\uff0c\\u6211\\u7231\\u4f60\\u4eec\\uff0c\\u54c8\\u54c8\\u54c8\\u54c8\\uff01-tag-200.0]": true, 
+  "test_ugc.py::test_create[-ugc_normal.jpg-content\\uff1atag\\u4f20\\u7a7a--200.0]": true, 
+  "test_ugc.py::test_create[-ugc_normal.jpg-content\\uff1atag\\u6709\\u7a7a\\u683c\\uff0c\\u5404\\u79cd\\u5b57\\u7b26-   tag\\uff1a \\uff08\\u524d\\u540e\\u4e2d\\uff09\\u6709 \\u7a7a \\u683c            -200.0]": true, 
+  "test_ugc.py::test_create[manyimages--content\\uff1a\\u591a\\u5f20\\u56fe\\u7247\\uff0c\\u56fe\\u7247\\u540d\\u5b57\\u5199\\u6b7b\\u5728\\u4ee3\\u7801\\u91cc-tag-200.0]": true, 
+  "test_ugc.py::test_create[manytags-ugc_normal.jpg-content\\uff1a\\u591a\\u4e2atag\\uff0ctag\\u540d\\u5b57\\u5199\\u6b7b\\u5728\\u4ee3\\u7801\\u91cc--200.0]": true, 
+  "test_ugc.py::test_create[nocontent-ugc_normal.jpg--tag:\\u6b63\\u6587\\u4e0d\\u4f20-200.0]": true, 
+  "test_ugc.py::test_create[notag-ugc_normal.jpg-content\\uff1atag\\u4e0d\\u4f20--200.0]": true
+}
