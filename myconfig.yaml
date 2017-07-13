@@ -1,0 +1,66 @@
+#相关配置，cn为国内测试环境，id为印尼测试环境
+
+cn:
+  #域名
+  domain_console: https://console-cn.hyku.org/
+  domain_merchant: https://merchant-cn.hyku.org/api/
+  domain_app: https://api-cn.hyku.org/v2/
+
+  #登录账号
+  console_account: tengjialin
+  console_password: '111111'
+  merchant_account: tengjialin
+  merchant_password: '111111'
+  app_account: '86-13458650253'
+  app_password: '111111'
+
+
+
+  #数据库
+  mysql_host: db-mysql.dev-cn.internal.hyku.org:3306
+  mysql_database: dev_cn_db_console
+  mysql_user: hrmes
+  mysql_password: hrmes
+  mongo_local: db-main.dev-cn.internal.hyku.org
+  mongo_port: '27017'
+
+  #redis
+  redis_host: caches.dev-cn.internal.hyku.org
+  redis_port: 6379
+  ugc_posts: '/ugcs/posts:'
+  ugc_uploadurl: '/ugcs/resources/uploadurl:'
+
+
+id:
+  #域名
+  domain_console: https://console-id.hyku.org/
+  domain_merchant: https://merchant-id.hyku.org/api/
+  domain_app: https://api-cn.hyku.org/v2/
+
+  #后台登录账号
+  console_account: tengjialin
+  console_password: '111111'
+  console_adminid: builtin_root
+  merchant_account: tengjialin
+  merchant_password: '111111'
+  app_account: '86-13458650253'
+  app_password: '111111'
+
+  #数据库
+  mysql_host: db-mysql.dev-id.internal.hyku.org:3306
+  mysql_database: dev_id_db_console
+  mysql_user: hrmes
+  mysql_password: hrmes
+  mongo_local: db-main.dev-id.internal.hyku.org
+  mongo_port: '27017'
+
+  #redis
+  redis_host: caches.dev-id.internal.hyku.org
+  redis_port: 6379
+  ugc_posts: '/ugcs/posts:*'
+  ugc_uploadurl: '/ugcs/resources/uploadurl:*'
+
+
+
+
+

@@ -1,0 +1,55 @@
+#所有api
+
+# 上传图片
+upload_image_console: utils/images # 内容后台
+upload_image_marchant: malls/resources/images # 商品后台
+upload_image_ugcpost: ugcs/resources/uploadurl # 上传ugc图片到s3
+
+# 登录
+login_console: administrators/login # 内容后台
+login_merchant: malls/operators/login # 商品后台
+login_app: loginer/login # app端
+
+
+# 创建获取
+create_id: etc/ids/{type} # 公共id
+channel: content/channels # 频道
+program: content/programs # 节目
+episode: content/episodes # episode
+info: content/infos # info
+topic: duels/topics # duel-topic
+template: duels/templates  # duel-template
+event: content/events  # 活动
+merchant: malls/merchants # merchant
+spu: malls/merchants/{merchant_id}/spus  # spu
+sku: malls/merchants/{merchant_id}/spus/{spu_id}/skus # sku
+attributes: malls/merchants/{merchant_id}/attributes # 属性
+create_merchant_user: malls/operators # 商品后台登录用户
+ugc_post: ugcs/posts # post
+get_article: content/articles # 批量获取文章
+create_article: draft/articles  # 创建文章
+
+
+
+# 提交审核
+review_update_program: /content/programs/{id}/release # 节目
+review_update_episode: /content/episodes/{id}/release # episode
+review_update_info: /content/infos/{id}/release # info
+review_update_topic: /duels/topics/{id}/release # duel-topic
+review_update_template: /duels/templates/{id}/release # duel-template
+review_update_event: /content/events/{id}/release # 活动
+review_update_article: /draft/articles/{article_id}/actions/release # 文章
+
+
+# 审核通过
+review_approval_program: /content/programs/{id}/approval # 节目
+review_approval_episode: /content/episodes/{id}/approval # episode
+review_approval_info: /content/infos/{id}/approval # info
+review_approval_topic: /duels/topics/{id}/approval # duel-topic
+review_approval_template: /duels/templates/{id}/approval # duel-template
+review_approval_event: /content/events/{id}/approval # 活动
+review_approval_article: /draft/articles/{article_id}/actions/approve # 文章
+
+
+# 好友关系
+relations: /users/relations # 关注好友
