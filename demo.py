@@ -52,4 +52,4 @@ def getpostlist():
     print len(a)
     print json.dumps(a, indent=2)
 
-# getpostlist()
+#  getpostlist()
