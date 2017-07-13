@@ -21,8 +21,12 @@ def get_userdata(factor, factor_value, intent):
     '''
     cur1 = msql()
     user = cur1.get("select * from accounts where %s = '%s'" % (factor,factor_value))
-    userdata = user[intent]
-    print userdata
+    if user:
+        userdata = user[intent]
+    else:
+        print u'没有找到相关内容'
+        userdata = None
+    return userdata
 
 
 def clean_all():
@@ -98,44 +102,47 @@ def clean_all():
 def clean_user(nick):
     cur1 = msql()
     id = get_userdata('nick', nick, 'user_id')   # 通过传进来的nick，获得这个用户的id
-
-    list_userid = ('account_device_infos', 'accounts', 'addresses', 'duel_history_count', 'episode_user_footprint',
-    'feedbacks', 'guess_choices', 'lottery_orders', 'market_point_history', 'notification_unread_count', 'point',
-    'point_breakdown', 'point_history', 'product_orders', 'program_point_history', 'thirdparty_infos', 'today_point',
-    'ugc_point_history', 'users_point_history', 'vote_choices')
-    for i in list_userid:
-        cur1.execute("delete from %s where user_id = '%s'" % (i, id))
-
-    for i in ('article_like_action', 'favorites', 'info_like_actions', 'ugc_like_action', 'ugc_report'):
-        cur1.execute("delete from %s where username = '%s'" % (i, id))
-
-    for i in ('article_replies', 'ugc_post', 'ugc_reply', 'info_replies'):
-        cur1.execute("delete from %s where author = '%s'" % (i, id))
-
-    for i in ('followed', 'following', 'friends'):
-        cur1.execute("delete from %s where me='%s' or target_user='%s'" % (i, id, id))
-
-    cur1.execute("delete from relation_meta where me='%s'" % id)
-    cur1.execute("delete from duel_instance where creator_id='%s' or competitor_id='%s'" % (id, id))
-    cur1.execute("delete from notification where sender='%s' or receiver='%s'" % (id, id))
-
-    d1 = cur1.query("SELECT table_name FROM information_schema.tables WHERE table_name LIKE 'event\_%%'")
-    if len(d1) == 0:  # 判断是否有event开头的表
-        print (u'没有event开头的表')
+    if id == None:
+        print u'没有此用户'
+        return 0
     else:
-        for i1 in d1:
-            cur1.execute("delete from '%s' where user_id= '%s'" % (i1["table_name"], nick))
-            print u'已清除'+nick+u'在'+i1["table_name"]+u""+u"中的数据"
+        list_userid = ('account_device_infos', 'accounts', 'addresses', 'duel_history_count', 'episode_user_footprint',
+        'feedbacks', 'guess_choices', 'lottery_orders', 'market_point_history', 'notification_unread_count', 'point',
+        'point_breakdown', 'point_history', 'product_orders', 'program_point_history', 'thirdparty_infos', 'today_point',
+        'ugc_point_history', 'users_point_history', 'vote_choices')
+        for i in list_userid:
+            cur1.execute("delete from %s where user_id = '%s'" % (i, id))
 
-    d2 = cur1.query("SELECT table_name FROM information_schema.tables WHERE table_name LIKE 'weekly\_%%'")
-    if len(d1) == 0:  # 判断是否有weekly开头的表
-        print (u'没有weekly开头的表')
-    else:
-        for i2 in d2:
-            cur1.execute("delete from `%s` where user_id= '%s'" % (i2["table_name"], nick))
-            print u'已清除'+nick+u'在'+i2["table_name"]+u""+u"中的数据"
+        for i in ('article_like_action', 'favorites', 'info_like_actions', 'ugc_like_action', 'ugc_report'):
+            cur1.execute("delete from %s where username = '%s'" % (i, id))
 
-    print u'删除完毕'
+        for i in ('article_replies', 'ugc_post', 'ugc_reply', 'info_replies'):
+            cur1.execute("delete from %s where author = '%s'" % (i, id))
+
+        for i in ('followed', 'following', 'friends'):
+            cur1.execute("delete from %s where me='%s' or target_user='%s'" % (i, id, id))
+
+        cur1.execute("delete from relation_meta where me='%s'" % id)
+        cur1.execute("delete from duel_instance where creator_id='%s' or competitor_id='%s'" % (id, id))
+        cur1.execute("delete from notification where sender='%s' or receiver='%s'" % (id, id))
+
+        d1 = cur1.query("SELECT table_name FROM information_schema.tables WHERE table_name LIKE 'event\_%%'")
+        if len(d1) == 0:  # 判断是否有event开头的表
+            print (u'没有event开头的表')
+        else:
+            for i1 in d1:
+                cur1.execute("delete from '%s' where user_id= '%s'" % (i1["table_name"], nick))
+                print u'已清除'+nick+u'在'+i1["table_name"]+u""+u"中的数据"
+
+        d2 = cur1.query("SELECT table_name FROM information_schema.tables WHERE table_name LIKE 'weekly\_%%'")
+        if len(d1) == 0:  # 判断是否有weekly开头的表
+            print (u'没有weekly开头的表')
+        else:
+            for i2 in d2:
+                cur1.execute("delete from `%s` where user_id= '%s'" % (i2["table_name"], nick))
+                print u'已清除'+nick+u'在'+i2["table_name"]+u""+u"中的数据"
+
+        print u'删除完毕'
 
 
 def clean_ugcpost():
