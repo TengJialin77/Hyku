@@ -6,6 +6,7 @@ cn:
   domain_merchant: https://merchant-cn.hyku.org/api/
   domain_app: https://api-cn.hyku.org/v2/
 
+
   #登录账号
   console_account: tengjialin
   console_password: '111111'
@@ -13,6 +14,8 @@ cn:
   merchant_password: '111111'
   app_account: '86-13458650253'
   app_password: '111111'
+  app_mobilecode: '111111'
+  app_mobkey: '12ffd09f72a62'
 
 
 

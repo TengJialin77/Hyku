@@ -272,6 +272,8 @@ def create_info(myid, product_id=None, push=None, type='图文-无横屏', name=
     url = myyaml.config['domain_console'] + myyaml.api['info']
     s = session.console_session()
     r = s.post(url, json=data)
+    print r.status_code
+    print r.text
     assert r.status_code == 200
     review.review('info', info_id)
 

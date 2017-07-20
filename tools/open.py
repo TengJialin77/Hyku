@@ -218,6 +218,7 @@ class MyWindow(Ui_MainWindow,QtGui.QMainWindow): #创建MyWindow类，直接继�
         program.create_info(episode_id, push=0,  type='竞猜', name='赢', guess_endtime=60, announce_endtime=30)
         program.create_info(episode_id, push=0,  type='竞猜', name='赢0分', guess_endtime=60, announce_endtime=30)
 
+
     def create_all_guess2(self):
         region = str(self.region_box.currentText())  # 获取用户选择的环境
         myyaml.set_region(region)  # 将整个程序运行环境设置成用户选择的环境

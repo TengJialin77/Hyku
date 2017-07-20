@@ -22,6 +22,8 @@ def review(type, id):  # 提交审核并审核通过
     s = session.console_session()
     r1 = s.post(url_update)  # 提交审核
     r2 = s.post(url_approval)  # 审核通过
+    print r1.status_code
+    print r2.status_code
     assert r1.status_code == 200
     assert r2.status_code == 200
 

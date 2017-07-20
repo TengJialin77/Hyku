@@ -5,6 +5,7 @@ import pymongo  # 链接mongodb工具
 import torndb  # 链接mysql工具
 
 import myyaml
+from common import date
 
 
 def msql():
@@ -12,15 +13,16 @@ def msql():
     return conn
 
 
-def get_userdata(factor, factor_value, intent):
+def get_sqldata(table, factor, factor_value, intent):
     '''
+    :param table: 查询的表
     :param factor: 查询条件
     :param factor_value: 查询条件的值
     :param intent: 查询目标
     :return:
     '''
     cur1 = msql()
-    user = cur1.get("select * from accounts where %s = '%s'" % (factor,factor_value))
+    user = cur1.get("select * from %s where %s = '%s'" % (table, factor,factor_value))
     if user:
         userdata = user[intent]
     else:
@@ -93,15 +95,28 @@ def clean_all():
     print u'已删除mysql数据库中event开头的表'
 
     d2 = cur1.query('SELECT table_name FROM information_schema.tables WHERE table_name LIKE %s', 'weekly\_%')  # 查询获取所有weekly开头的表名字，赋值给的d2
-    for i3 in d2:  # 轮询出每个weekly开头的表，并清空
-        i4=i3['table_name']
-        cur1.execute('delete from %s' % i4)
-    print u'已清空mysql数据库中weekly开头的表'
+    if len(d2) == 0:  # 判断是否有weekly开头的表
+        print (u'没有weekly开头的表')
+    else:
+        list_delete = []
+        list_clean = []
+        for i3 in d2:
+            table_name = i3['table_name']
+            if table_name < 'weekly_%s_point' % date.get_date(1):  # 判断这个表是否已经是历史表，不是本周还在用的表
+                list_delete.append(table_name)  # 将历史表加入list_delete列表，下方直接删除整个表
+            else:
+                list_clean.append(table_name)  # 将还在用的表加入list_clean列表，下方只是清空这些表
+        for i4 in list_delete:
+            cur1.execute('drop table %s' % i4)
+            print u'已删除表%s' % i4
+        for i5 in list_clean:
+            cur1.execute('delete from %s' % i5)
+            print u'已清空表%s' % i5
 
 
 def clean_user(nick):
     cur1 = msql()
-    id = get_userdata('nick', nick, 'user_id')   # 通过传进来的nick，获得这个用户的id
+    id = get_sqldata('accounts', 'nick', nick, 'user_id')   # 通过传进来的nick，获得这个用户的id
     if id == None:
         print u'没有此用户'
         return 0
@@ -131,11 +146,11 @@ def clean_user(nick):
             print (u'没有event开头的表')
         else:
             for i1 in d1:
-                cur1.execute("delete from '%s' where user_id= '%s'" % (i1["table_name"], nick))
+                cur1.execute("delete from `%s` where user_id= '%s'" % (i1["table_name"], id))
                 print u'已清除'+nick+u'在'+i1["table_name"]+u""+u"中的数据"
 
         d2 = cur1.query("SELECT table_name FROM information_schema.tables WHERE table_name LIKE 'weekly\_%%'")
-        if len(d1) == 0:  # 判断是否有weekly开头的表
+        if len(d2) == 0:  # 判断是否有weekly开头的表
             print (u'没有weekly开头的表')
         else:
             for i2 in d2:
